@@ -25,4 +25,22 @@ public class Assertions extends BaseTestCase {
        int value = Response.jsonPath().getInt(name);
        assertEquals(expectedValue,value, "JSON value is not equals to expected value");
    }
-}
+
+   public static void assertResponseTexEquals (Response Response, String expectedAnswer){
+       assertEquals(
+               expectedAnswer,
+               Response.asString(),
+               "Response text is not as expected"
+       );
+
+   }
+    public static void assertResponseCodeEquals (Response Response, int expectedStatusCode){
+        assertEquals(
+                expectedStatusCode,
+                Response.statusCode(),
+                "Response status is not as expected"
+        );}
+        public static void assertJsoneHasKey (Response Response, String expectedFieldName){
+            Response.then().assertThat().body("$", hasKey(expectedFieldName));
+
+}}
