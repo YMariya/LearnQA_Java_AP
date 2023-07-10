@@ -38,6 +38,15 @@ public class ApiCoreRequests {
                 .get(url)
                 .andReturn();
     }
+
+    @Step("Make a Get-request with auth token only")
+    public Response makeGetRequest (String url){
+        return given()
+                .filter(new AllureRestAssured())
+                .get(url)
+                .andReturn();
+    }
+
     @Step("Make a Post-request")
     public Response makePostRequest (String url, Map<String, String> authData){
         return given()

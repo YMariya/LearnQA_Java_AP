@@ -1,20 +1,9 @@
 package lib;
 
-import io.restassured.RestAssured;
-import io.restassured.internal.common.assertion.Assertion;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import lib.Assertions;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -40,7 +29,22 @@ public class Assertions extends BaseTestCase {
                 Response.statusCode(),
                 "Response status is not as expected"
         );}
-        public static void assertJsoneHasKey (Response Response, String expectedFieldName){
+        public static void assertJsoneHasField(Response Response, String expectedFieldName){
             Response.then().assertThat().body("$", hasKey(expectedFieldName));
 
-}}
+}
+
+    public static void assertJsoneHasNotField(Response Response, String expectedFieldName){
+        Response.then().assertThat().body("$", not(hasKey(expectedFieldName)));
+
+    }
+
+    public static void assertJsoneHasFields(Response Response, String[] expectedFieldNames){
+        for (String expectedFieldName : expectedFieldNames) {
+            Assertions.assertJsoneHasField(Response, expectedFieldName);
+        }
+
+    }
+
+
+}

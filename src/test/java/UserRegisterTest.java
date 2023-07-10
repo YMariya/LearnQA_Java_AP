@@ -1,7 +1,5 @@
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
@@ -10,7 +8,6 @@ import lib.DataGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +54,7 @@ public class UserRegisterTest extends BaseTestCase {
                 .makePostRequest("https://playground.learnqa.ru/api/user/", userData);
 
         Assertions.assertResponseCodeEquals(responseCreateAuth, 200);
-        Assertions.assertJsoneHasKey(responseCreateAuth, "id");
+        Assertions.assertJsoneHasField(responseCreateAuth, "id");
     }
 
 
