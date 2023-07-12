@@ -25,10 +25,8 @@ public class UserRegisterTest extends BaseTestCase {
 
         Map<String, String> userData = new HashMap<>();
         userData.put("email", email);
-        userData.put("password", "learnga");
-        userData.put("username", "learnga");
-        userData.put("firstName", "learnga");
-        userData.put("lastName", "learnga");
+        userData = DataGenerator.getRegistrationData(userData);
+
 
         Response responseCreateAuth = apiCoreRequests
                 .makePostRequest("https://playground.learnqa.ru/api/user/", userData);
@@ -43,12 +41,8 @@ public class UserRegisterTest extends BaseTestCase {
     public void testCreateUserSuccessfully() {
         String email = DataGenerator.getRandomEmail();
 
-        Map<String, String> userData = new HashMap<>();
-        userData.put("email", email);
-        userData.put("password", "learnga");
-        userData.put("username", "learnga");
-        userData.put("firstName", "learnga");
-        userData.put("lastName", "learnga");
+        Map<String, String> userData = DataGenerator.getRegistrationData();
+
 
         Response responseCreateAuth = apiCoreRequests
                 .makePostRequest("https://playground.learnqa.ru/api/user/", userData);
