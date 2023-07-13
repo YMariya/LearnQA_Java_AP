@@ -1,3 +1,4 @@
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -5,14 +6,18 @@ import lib.ApiCoreRequests;
 import lib.Assertions;
 import lib.BaseTestCase;
 import lib.DataGenerator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+@Epic("User Management")
+@Feature("Delete User")
 
 public class UserDeleteTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Deleting a user who was just created")
     @Test
     public void testDeletedJustCreationTest() {
         //GENERATE USER
@@ -47,8 +52,9 @@ public class UserDeleteTest extends BaseTestCase {
         System.out.println(responseUserData.asString().equals("User not found"));
     }
 
-
+    @Severity(SeverityLevel.NORMAL)
     @Test
+    @Story("Attempting to delete a user that should not be deleted")
     public void testNotDeletedUserTest() {
 
 //LOGIN
@@ -70,7 +76,8 @@ public class UserDeleteTest extends BaseTestCase {
         Assertions.assertResponseTexEquals(responseEditUser, "Please, do not delete test users with ID 1, 2, 3, 4 or 5.");
     }
 
-
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Test Deleted Other User Test")
     @Test
     public void testDeletedOtherUserTest() {
         //GENERATE USER

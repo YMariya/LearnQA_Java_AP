@@ -1,4 +1,5 @@
 import com.fasterxml.jackson.annotation.JsonAlias;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -10,10 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+@Epic("User Management")
+@Feature("Edit User")
 
 public class UserEditTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Editing a user who was just created")
     @Test
     public void testEditJustCreationTest() {
         //GENERATE USER
@@ -52,7 +56,8 @@ public class UserEditTest extends BaseTestCase {
                         this.getCookie(responseGetAuth, "auth_sid"));
         System.out.println(responseUserData.asString());
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Editing a user who was not auth")
     @Test
     public void testEditNotAuthTest() {
         //GENERATE USER
@@ -81,7 +86,8 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertResponseTexEquals(responseEditUser, "Auth token not supplied");
 
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Editing a user who was auth other user")
     @Test
     public void testEditAuthOtherUserTest() {
         //GENERATE USER
@@ -118,7 +124,8 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertResponseCodeEquals(responseEditUser, 400);
         Assertions.assertResponseTexEquals(responseEditUser, "Please, do not edit test users with ID 1, 2, 3, 4 or 5.");
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Editing a user email")
     @Test
     public void testEditEmailTest() {
         //GENERATE USER
@@ -156,7 +163,8 @@ public class UserEditTest extends BaseTestCase {
         Assertions.assertResponseCodeEquals(responseEditUser, 400);
         Assertions.assertResponseTexEquals(responseEditUser, "Invalid email format");
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Editing on short name")
     @Test
     public void testEditNameOnShortTest() {
         //GENERATE USER

@@ -1,5 +1,4 @@
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import io.qameta.allure.*;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.Assertions;
@@ -18,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UserRegisterTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @Test
     public void testCreateUserWithExistingEmail() {
         String email = "vinkotov@example.com";
@@ -36,7 +36,8 @@ public class UserRegisterTest extends BaseTestCase {
 
 
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @Test
     public void testCreateUserSuccessfully() {
         String email = DataGenerator.getRandomEmail();
@@ -51,7 +52,8 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertJsoneHasField(responseCreateAuth, "id");
     }
 
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @Test
     public void testCreateUserBadEmail() {
         String email = DataGenerator.getBadEmail();
@@ -70,7 +72,8 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertResponseTexEquals(responseCreateAuth, "Invalid email format");
     }
 
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @Test
     public void testCreateUserNameShort() {
         String email = DataGenerator.getRandomEmail();
@@ -89,7 +92,8 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertResponseTexEquals(responseCreateAuth, "The value of 'username' field is too short");
     }
 
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @Test
     public void testCreateUserNameLong() {
         String email = DataGenerator.getRandomEmail();
@@ -107,7 +111,8 @@ String name = DataGenerator.getLongName();
         Assertions.assertResponseCodeEquals(responseCreateAuth, 400);
         Assertions.assertResponseTexEquals(responseCreateAuth, "The value of 'username' field is too long");
     }
-
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Create User")
     @ParameterizedTest
     @CsvSource({
             ", learnga, learnga, learnga",
